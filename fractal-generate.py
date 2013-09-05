@@ -30,7 +30,9 @@ from base64 import b64encode
 s = xmlrpclib.ServerProxy('http://127.0.0.1:8000')
 
 (height, width) = s.get_size()
-chars = [" ", "\033[34m.\033[0m", "\033[94m,\033[0m", "\033[36m-\033[0m", "\033[96m:\033[0m", "\033[32m;\033[0m", "\033[92mi\033[0m", "\033[35m+\033[0m", "\033[95mh\033[0m", "\033[31mH\033[0m", "\033[91mM\033[0m", "\033[33m$\033[0m", "\033[93m*\033[0m", "\033[37m#\033[0m", "\033[37m@\033[0m", "\033[90m\033[4m \033[24m\033[39m"]
+orig_chars = [' ', '.', ',', '-', ':', ';', 'i', '+', 'h', 'H', 'M', '$', '*', '#', '@', '_']
+color_sequences = [('', ''), ('\033[34m', '\033[0m'), ('\033[94m', '\033[0m'), ('\033[36m', '\033[0m'), ('\033[96m', '\033[0m'), ('\033[32m', '\033[0m'), ('\033[92m', '\033[0m'), ('\033[35m', '\033[0m'), ('\033[95m', '\033[0m'), ('\033[31m', '\033[0m'), ('\033[91m', '\033[0m'), ('\033[33m', '\033[0m'), ('\033[93m', '\033[0m'), ('\033[37m', '\033[0m'), ('\033[37m', '\033[0m'), ('\033[90m\033[4m', '\033[24m\033[39m')]
+chars = []
 
 def gen_mandelbrot(minX, maxX, aspectRatio):
     yScale = (maxX-minX)*(float(height)/width)*aspectRatio
@@ -90,6 +92,9 @@ while True:
         maxX = minX
         minX = t
     aspectRatio = random.randrange(2.0, stop=5.0, step=0.1, int=float)
+    random.shuffle(color_sequences)
+    random.shuffle(orig_chars)
+    chars = [ color_sequences[i][0] + orig_chars[i] + color_sequences[i][1] for i in xrange(0, len(orig_chars) -1) ]
     t = s.pick_type()
     f = ""
     if t == "julia":
