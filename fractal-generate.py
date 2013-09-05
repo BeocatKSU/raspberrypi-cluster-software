@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/pypy/bin/pypy
 # Copyright (c) 2013, Adam Tygart
 # All rights reserved.
 #
@@ -27,7 +27,7 @@
 import xmlrpclib, random
 from base64 import b64encode
 
-s = xmlrpclib.ServerProxy('http://127.0.0.1:8000')
+s = xmlrpclib.ServerProxy('http://192.168.0.1:8000')
 
 (height, width) = s.get_size()
 orig_chars = [' ', '.', ',', '-', ':', ';', 'i', '+', 'h', 'H', 'M', '$', '*', '#', '@', '_']

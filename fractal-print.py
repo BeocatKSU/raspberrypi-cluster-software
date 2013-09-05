@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/pypy/bin/pypy
 # Copyright (c) 2013, Adam Tygart
 # All rights reserved.
 #
@@ -27,7 +27,7 @@
 import xmlrpclib, os, time
 from base64 import b64decode
 
-s = xmlrpclib.ServerProxy('http://127.0.0.1:8000')
+s = xmlrpclib.ServerProxy('http://192.168.0.1:8000')
 
 (height, width) = os.popen('stty size', 'r').read().split()
 height = int(height)
@@ -40,4 +40,4 @@ while True:
         print(fractal)
     except:
         print("Didn't get a fractal")
-    time.sleep(0.2)
+    time.sleep(0.5)

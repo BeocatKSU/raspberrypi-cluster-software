@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/opt/pypy/bin/pypy
 # Copyright (c) 2013, Adam Tygart
 # All rights reserved.
 #
@@ -34,7 +34,7 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 # Create server
-server = SimpleXMLRPCServer(("127.0.0.1", 8000),
+server = SimpleXMLRPCServer(("192.168.0.1", 8000),
                             requestHandler=RequestHandler)
 server.register_introspection_functions()
 
@@ -44,7 +44,7 @@ class MyStore(object):
     def __init__(self):
         """initializes a Store"""
         self.store = Queue(maxsize=30)
-        self.size = (80, 24)
+        self.size = (24, 80)
         self.typesOfFractals = ['julia', 'mandelbrot', 'test']
     def put(self,item):
         """puts an item into the queue"""
