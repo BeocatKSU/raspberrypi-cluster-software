@@ -43,7 +43,7 @@ server.register_introspection_functions()
 class MyStore(object):
     def __init__(self):
         """initializes a Store"""
-        self.store = Queue(maxsize=30)
+        self.store = Queue(maxsize=100)
         self.size = (24, 80)
         self.typesOfFractals = ['julia', 'mandelbrot', 'test']
     def put(self,item):

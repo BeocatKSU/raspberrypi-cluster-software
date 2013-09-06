@@ -39,5 +39,6 @@ while True:
         fractal = fractal.rstrip('\n')
         print(fractal)
     except:
-        print("Didn't get a fractal")
-    time.sleep(0.5)
+        pass
+        #print("Didn't get a fractal")
+    time.sleep(1.0)
