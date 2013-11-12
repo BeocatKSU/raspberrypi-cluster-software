@@ -2,8 +2,12 @@
 \pagestyle{empty}
 \usepackage{color}
 \usepackage[margin=0.9in]{geometry}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage[scaled]{helvet}
+\renewcommand*\familydefault{\sfdefault}
+\usepackage[T1]{fontenc}
 \begin{document}
-  \noindent
   \begin{minipage}[t]{0.33\textwidth}
     \begin{center}
       \textcolor[RGB]{81,40,136}{\Large{\textbf{Kansas State University}}}
@@ -39,7 +43,7 @@
       These Raspberry Pis are running Raspbian, a distribution of Debian Linux for the Pis.
       On them, we are running Pypy, a version of Python that was written in Python and compiled into a fully functional Linux binary.
       The advantage of Pypy is that it can do JIT allowing even greater speedups than running this in CPython.
-      The fractal generation code can be viewed/used/abused/improved at https://github.com/BeocatKSU/raspberrypi-cluster-software
+      The fractal generation code can be viewed/used/abused/improved at \url{https://github.com/BeocatKSU/raspberrypi-cluster-software} or with the QR Code below
 
     \subsection{Cost}
       \begin{center}
@@ -48,16 +52,21 @@
           \textbf{Quantity}&\textbf{Unit Cost}&\textbf{Description}&\textbf{Total}\\
           \hline
           6&\$35.00&Raspberry Pi&\$210.00\\
+          6&\$7.71&SD Cards&\$46.26\\
           6&\$1.03&USB Cables&\$6.18\\
           6&\$0.53&Ethernet Cables&\$3.18\\
-          6&\$7.71&SD Cards&\$46.26\\
           4&\$5.95&Power Supplies&\$23.80\\
-          1&\$2.50&HDMI Cable&\$2.50\\
           1&\$7.91&100Mb Switch&\$7.91\\
+          1&\$2.50&HDMI Cable&\$2.50\\
           ?&\$0.00&Assorted Legos (preexisting)&\$0.00\\
           \hline
-	        &&&\textbf{\$299.83}\\
+	  &&&\textbf{\$299.83}\\
           \hline
         \end{tabular}
+      \end{center}
+
+    \subsection{QR Code}
+      \begin{center}
+        \includegraphics[width=100pt]{qrcode.png}
       \end{center}
 \end{document}
