@@ -1,4 +1,4 @@
-#!/opt/pypy/bin/pypy
+#!/usr/bin/env python
 # Copyright (c) 2013, Adam Tygart
 # All rights reserved.
 #
@@ -24,10 +24,22 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-import xmlrpclib, os, time
+import sys
+import os, time
 from base64 import b64decode
+import argparse
 
-s = xmlrpclib.ServerProxy('http://192.168.0.1:8000')
+parser = argparse.ArgumentParser(description="Generates Fractals")
+parser.add_argument('-d', '--destination', type=str, default='192.168.0.1', help='IP to send the fractals to')
+
+args = parser.parse_args()
+
+if sys.version_info[0] < 3:
+    import xmlrpclib
+    s = xmlrpclib.ServerProxy('http://' + args.destination + ':8000')
+else:
+    import xmlrpc.client
+    s = xmlrpc.client.ServerProxy('http://' + args.destination + ':8000')
 
 (height, width) = os.popen('stty size', 'r').read().split()
 height = int(height)

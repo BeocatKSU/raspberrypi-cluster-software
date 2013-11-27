@@ -1,4 +1,4 @@
-#!/opt/pypy/bin/pypy
+#!/usr/bin/env python
 # Copyright (c) 2013, Adam Tygart
 # All rights reserved.
 #
@@ -24,17 +24,30 @@
 # (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 # SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-from SimpleXMLRPCServer import SimpleXMLRPCServer
-from SimpleXMLRPCServer import SimpleXMLRPCRequestHandler
-from Queue import Queue
+import sys
+
+if sys.version_info[0] < 3:
+    from SimpleXMLRPCServer import SimpleXMLRPCServer
+    from SimpleXMLRPCServer import SimpleXMLRPCRequestHandler
+    from Queue import Queue
+else:
+    from xmlrpc.server import SimpleXMLRPCServer
+    from xmlrpc.server import SimpleXMLRPCRequestHandler
+    from queue import Queue
 import random
+import argparse
+
+parser = argparse.ArgumentParser(description="Generates Fractals")
+parser.add_argument('-d', '--destination', type=str, default='192.168.0.1', help='IP to send the fractals to')
+
+args = parser.parse_args()
 
 # Restrict to a particular path.
 class RequestHandler(SimpleXMLRPCRequestHandler):
     rpc_paths = ('/RPC2',)
 
 # Create server
-server = SimpleXMLRPCServer(("192.168.0.1", 8000),
+server = SimpleXMLRPCServer((args.destination, 8000),
                             requestHandler=RequestHandler)
 server.register_introspection_functions()
 
